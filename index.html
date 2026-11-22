@@ -201,7 +201,14 @@ if (data.session && data.session.user) {
 
 
 restoreLoginSession();
-  
+
+document.getElementById('openSignup').addEventListener('click', (event) => {
+  event.preventDefault();
+
+  document.getElementById('loginDialog').close();
+  document.getElementById('signupDialog').showModal();
+});
+
 document.getElementById('usernameForm').addEventListener('submit', async (event) => {
   event.preventDefault();
 

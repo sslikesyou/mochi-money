@@ -59,10 +59,7 @@
   const SUPABASE_KEY =
     "sb_publishable_fW-lBHoWpat8-rCzkUZROQ_ieQ2DPUH";
 
-  const supabaseClient = window.supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_KEY
-  );
+  const supabaseClient = window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
 </script>
 
 <script>
@@ -75,4 +72,13 @@ $('closeLogin').addEventListener('click', () => {
   $('loginDialog').close();
 });
 render()})();
-</script><script>if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) {window.addEventListener('load', () => {navigator.serviceWorker.register('./sw.js').catch(err => console.warn('Offline mode unavailable:', err));});}</script></body></html>
+</script><script>if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) {window.addEventListener('load', () => {navigator.serviceWorker.register('./sw.js').catch(err => console.warn('Offline mode unavailable:', err));});}</script>
+<script>
+document.getElementById('loginForm').addEventListener('submit', async (event) => {
+  event.preventDefault();
+  console.log('Mochi Money login form submitted!');
+});
+</script>
+
+</body>
+</html>

@@ -93,6 +93,9 @@ document.getElementById('loginForm').addEventListener('submit', async (event) =>
 
   alert('Login successful! Welcome to Mochi Money ♡');
   document.getElementById('loginDialog').close();
+  
+document.getElementById('loginBtn').textContent = data.user.email;
+
 });
 
 </script>

@@ -135,11 +135,22 @@ async function restoreLoginSession() {
     return;
   }
 
-  if (data.session && data.session.user) {
+  
+if (data.session && data.session.user) {
+  const user = data.session.user;
+  const username = user.user_metadata?.username;
+
+  if (username) {
     document.getElementById('loginBtn').textContent =
-      data.session.user.email;
+      'Hi, ' + username + ' ♡';
+  } else {
+    document.getElementById('loginBtn').textContent =
+      'Set Username ♡';
+
+    document.getElementById('usernameDialog').showModal();
   }
 }
+
 
 restoreLoginSession();
 

@@ -208,6 +208,10 @@ document.getElementById('openSignup').addEventListener('click', (event) => {
   document.getElementById('loginDialog').close();
   document.getElementById('signupDialog').showModal();
 });
+document.getElementById('closeSignup').addEventListener('click', () => {
+  document.getElementById('signupDialog').close();
+});
+
 
 document.getElementById('usernameForm').addEventListener('submit', async (event) => {
   event.preventDefault();

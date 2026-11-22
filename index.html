@@ -97,6 +97,23 @@ document.getElementById('loginForm').addEventListener('submit', async (event) =>
 document.getElementById('loginBtn').textContent = data.user.email;
 
 });
+  
+async function restoreLoginSession() {
+  const { data, error } = await supabaseClient.auth.getSession();
+
+  if (error) {
+    console.error('Session check failed:', error.message);
+    return;
+  }
+
+  if (data.session && data.session.user) {
+    document.getElementById('loginBtn').textContent =
+      data.session.user.email;
+  }
+}
+
+restoreLoginSession();
+
 
 </script>
 

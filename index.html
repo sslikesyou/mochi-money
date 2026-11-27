@@ -211,8 +211,55 @@ document.getElementById('openSignup').addEventListener('click', (event) => {
 document.getElementById('closeSignup').addEventListener('click', () => {
   document.getElementById('signupDialog').close();
 });
+document.getElementById('signupForm').addEventListener('submit', async (event) => {
+  event.preventDefault();
 
+  const username = document.getElementById('signupUsername').value.trim();
+  const email = document.getElementById('signupEmail').value.trim();
+  const password = document.getElementById('signupPassword').value;
 
+  if (!/^[A-Za-z0-9_]{3,20}$/.test(username)) {
+    alert('Username must be 3–20 characters using letters, numbers or underscores.');
+    return;
+  }
+
+  const signupButton = document.querySelector('#signupForm button[type="submit"]');
+  signupButton.disabled = true;
+
+  try {
+    const { data, error } = await supabaseClient.auth.signUp({
+      email: email,
+      password: password,
+      options: {
+        data: {
+          username: username
+        }
+      }
+    });
+
+    if (error) {
+      alert('Sign up failed: ' + error.message);
+      return;
+    }
+
+    if (data.session) {
+      alert('Account created! Welcome to Mochi Money ♡');
+      document.getElementById('loginBtn').textContent =
+        'Hi, ' + username + ' ♡';
+    } else {
+      alert('Check your email for a confirmation link before logging in ♡');
+    }
+
+    document.getElementById('signupDialog').close();
+    document.getElementById('signupForm').reset();
+
+  } catch (error) {
+    console.error('Sign up request failed:', error);
+    alert('Something went wrong. Please try again.');
+  } finally {
+    signupButton.disabled = false;
+  }
+});
 document.getElementById('usernameForm').addEventListener('submit', async (event) => {
   event.preventDefault();
 
